@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-const Header = () => <h2>Header</h2>;
+import Header from './Header';
 const Appointments = () => <h2>Appointments</h2>;
 const AppointmentNew = () => <h2>AppointmentNew</h2>;
 const Landing = () => <h2>Landing</h2>;
@@ -24,5 +24,5 @@ const App = () => {
         </div>
     );
 };
-
+ 
 export default App;
