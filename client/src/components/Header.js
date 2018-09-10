@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -37,9 +38,12 @@ renderContent() {
         return (
             <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
-                    <a className="navbar-item" href="http://localhost:3000">
+                    <Link
+                        to={this.props.auth ? '/appointments' : '/'} 
+                        className="navbar-item"
+                    >
                         <img src={require("../images/calendar.png")} alt="Appointment Setter App" />
-                    </a>
+                    </Link>
                     <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
