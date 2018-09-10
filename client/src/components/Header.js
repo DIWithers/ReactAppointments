@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+
 class Header extends Component {
     render() {
         return (
@@ -18,7 +21,7 @@ class Header extends Component {
                     <div className="navbar-item">
                         <a href="/auth/google" className="button is-danger">
                             <span className="icon">
-                                <i className="fa fa-google"></i>
+                                <FontAwesomeIcon icon={faSignInAlt} />
                             </span>
                             <span>Login With Google</span>
                         </a>

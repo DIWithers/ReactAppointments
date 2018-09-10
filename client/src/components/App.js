@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import Header from './Header';
 const Appointments = () => <h2>Appointments</h2>;
 const AppointmentNew = () => <h2>AppointmentNew</h2>;
