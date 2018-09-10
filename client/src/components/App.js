@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -11,21 +11,27 @@ const Landing = () => <h2>Landing</h2>;
 const Clients = () => <h2>Clients</h2>
 const ClientNew = () => <h2>ClientNew</h2>
 
-const App = () => {
-    return (
-        <div>
-            <Header />
-            <BrowserRouter>
-                <div>
-                    <Route exact path="/" component={Landing} />
-                    <Route exact path="/appointments" component={Appointments} />
-                    <Route exact path="/appointments/new" component={AppointmentNew} />
-                    <Route exact path="/clients" component={Clients} />
-                    <Route exact path="/clients/new" component={ClientNew} />
-                </div>
-            </BrowserRouter>
-        </div>
-    );
+class App extends Component {
+    componentDidMount() {
+        
+    }
+
+    render () {
+        return (
+            <div className="container">
+                <Header />
+                <BrowserRouter>
+                    <div>
+                        <Route exact path="/" component={Landing} />
+                        <Route exact path="/appointments" component={Appointments} />
+                        <Route exact path="/appointments/new" component={AppointmentNew} />
+                        <Route exact path="/clients" component={Clients} />
+                        <Route exact path="/clients/new" component={ClientNew} />
+                    </div>
+                </BrowserRouter>
+            </div>
+        );
+    }
 };
  
 export default App;
