@@ -1,15 +1,16 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const ObjectId = mongoose.Schema.Types.ObjectId;
+const SlotSchema = require('./Slot');
 
 const appointmentSchema = new Schema({
     name: String,
     email: String,
     phone: Number,
-    slots: {
-        type: ObjectId, 
-        ref: 'Slot'
+    slots: [SlotSchema],
+    createdAt: Date,
+    _user: {
+        type: Schema.Types.ObjectId, ref: 'User'
     },
-    createdAt: Date
+    confirmationSent: { type: Boolean, default: false }
 });
  mongoose.model('appointments', appointmentSchema); 
