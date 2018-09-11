@@ -1,4 +1,5 @@
 require('./models/User');
+require('./models/Appointment');
 require('./services/passport');
 const express = require('express');
 const mongoose = require('mongoose');

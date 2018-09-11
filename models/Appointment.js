@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const appointmentSchema = new Schema({
-    id: ObjectId,
     name: String,
     email: String,
     phone: Number,
@@ -13,4 +12,4 @@ const appointmentSchema = new Schema({
     },
     createdAt: Date
 });
- mongoose.model('Appointment', appointmentSchema); 
+ mongoose.model('appointments', appointmentSchema); 
