@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Header from './Header';
 import Landing from './Landing';
-const Appointments = () => <h2>Appointments</h2>;
+import Dashboard from './Dashboard';
 const AppointmentNew = () => <h2>AppointmentNew</h2>;
 const Clients = () => <h2>Clients</h2>
 const ClientNew = () => <h2>ClientNew</h2>
@@ -25,7 +25,7 @@ class App extends Component {
                     <div>
                         <Header />
                         <Route exact path="/" component={Landing} />
-                        <Route exact path="/appointments" component={Appointments} />
+                        <Route exact path="/appointments" component={Dashboard} />
                         <Route exact path="/appointments/new" component={AppointmentNew} />
                         <Route exact path="/clients" component={Clients} />
                         <Route exact path="/clients/new" component={ClientNew} />
