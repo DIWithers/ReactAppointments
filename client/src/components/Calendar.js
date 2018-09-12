@@ -16,13 +16,13 @@ class Calendar extends Component {
     renderHeader() {
         return (
             <div className="header row flex-middle">
-                <div className="col col-start">
+                <div className="col col-end">
                     <div className="icon" onClick={this.prevWeek}>chevron_left</div>
                 </div>
                 <div className="col col-center">
                     <span>{this.state.currentMonth}</span>
                 </div>
-                <div className="col col-end" onClick={this.nextWeek}>
+                <div className="col col-start" onClick={this.nextWeek}>
                     <div className="icon">chevron_right</div>
                 </div>
             </div>
