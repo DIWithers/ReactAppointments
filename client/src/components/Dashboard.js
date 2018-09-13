@@ -1,6 +1,6 @@
 import React from 'react';
 import Calendar from './Calendar';
-import Appointments from './Appointments';
+import Appointments from './appointments/Appointments';
 
 const Dashboard = () => {
     return (

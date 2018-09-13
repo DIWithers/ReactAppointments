@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import '../css/Calendar.css';
 
@@ -106,4 +107,10 @@ class Calendar extends Component {
         );
     }
 }
-export default Calendar;
+
+function mapStateToProps({ selectedDate }) {
+    return { selectedDate };
+}
+
+
+export default connect(mapStateToProps)(Calendar);

@@ -3,13 +3,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
-const AppointmentNew = () => <h2>AppointmentNew</h2>;
+import AppointmentNew from './appointments/AppointmentNew';
 const Clients = () => <h2>Clients</h2>
 const ClientNew = () => <h2>ClientNew</h2>
 
