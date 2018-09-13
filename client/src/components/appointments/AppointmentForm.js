@@ -3,6 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import AppointmentField from './AppointmentField';
 import SlotField from './SlotField';
 import Calendar from '../Calendar';
+import { connect } from 'react-redux';
 
 class AppointmentNew extends Component {
     renderFields() {
@@ -38,6 +39,12 @@ function validate(values) {
 
     return errors;
 }
+
+function mapStateToProps({date}) {
+    return {date};
+}
+
+AppointmentNew = connect(mapStateToProps)(AppointmentNew);
 
 export default reduxForm({
     validate: validate,

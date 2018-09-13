@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import * as actions from '../actions';
 import '../css/Calendar.css';
 
 class Calendar extends Component {
@@ -14,6 +15,11 @@ class Calendar extends Component {
             currentMonth: moment().format("MMMM YYYY"),
         }
     }
+
+    componentDidMount() {
+        this.props.updateDate(this.state.selectedDate.toObject());
+    }
+
     renderHeader() {
         return (
             <div className="header row flex-middle">
@@ -79,6 +85,7 @@ class Calendar extends Component {
         this.setState({
             selectedDate: day
         });
+        this.props.updateDate(day.toObject());
     };
   
     nextWeek = () => {
@@ -113,4 +120,4 @@ function mapStateToProps({ selectedDate }) {
 }
 
 
-export default connect(mapStateToProps)(Calendar);
+export default connect(mapStateToProps, actions)(Calendar);
