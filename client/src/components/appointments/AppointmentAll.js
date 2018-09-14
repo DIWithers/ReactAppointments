@@ -5,7 +5,7 @@ class AppointmentAll extends Component {
         return (
             <div>
                 <div className="level">
-                    <div className="level-item">Appointments</div>
+                    <div className="level-item"><h1>Appointments</h1></div>
                 </div>
             </div>
         );

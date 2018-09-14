@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AppointmentNew from './AppointmentNew';
 import AppointmentAll from './AppointmentAll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarPlus, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
 class Appointments extends Component {
     state = {
@@ -10,13 +10,17 @@ class Appointments extends Component {
     }
     renderContent() {
         if (this.state.showCreateNewAppt) {
-            return <AppointmentNew />;
+            return (
+                <div>
+                    <button onClick = { () => this.setState({showCreateNewAppt: false}) } className="button level-right">
+                        <span className="icon">
+                            <FontAwesomeIcon icon={faArrowCircleLeft} />
+                        </span>
+                    </button>
+                    <AppointmentNew />
+                </div>
+            );
         }
-        return <AppointmentAll onHandleClick={() => this.setState({
-            showCreateNewAppt: true
-        })} />;
-    }
-    render() {
         return (
             <div>
                 <button onClick = { () => this.setState({showCreateNewAppt: true}) } className="button level-right">
@@ -24,6 +28,14 @@ class Appointments extends Component {
                         <FontAwesomeIcon icon={faCalendarPlus} />
                     </span>
                 </button>
+                <AppointmentAll />
+            </div>
+        );
+    }
+    render() {
+        return (
+            <div>
+
                 {this.renderContent()}
             </div>
            
