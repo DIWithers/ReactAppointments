@@ -9,7 +9,6 @@ class AppointmentNew extends Component {
     renderFields() {
         return (
             <div>
-                <Field label="Date" type="text" name="date" component={Calendar}/>
                 <Field label="Available Times" name="slot" component={SlotField}/>
                 <Field label="Name" type="text" name="name" component={AppointmentField}/>
                 <Field label="Email" type="email" name="email" component={AppointmentField}/>
