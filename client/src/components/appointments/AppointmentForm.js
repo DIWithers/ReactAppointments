@@ -21,7 +21,10 @@ class AppointmentNew extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+                <form onSubmit={this.props.handleSubmit(values => {
+                    values.date = this.props.date;
+                    console.log(values);
+                })}>
                     {this.renderFields()}
                     <button type="submit">Submit</button>
                 </form>
