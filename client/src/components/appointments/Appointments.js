@@ -6,13 +6,13 @@ import { faCalendarPlus, faArrowCircleLeft } from '@fortawesome/free-solid-svg-i
 
 class Appointments extends Component {
     state = {
-        showCreateNewAppt: false
+        showAppointmentNew: false
     }
     renderContent() {
-        if (this.state.showCreateNewAppt) {
+        if (this.state.showAppointmentNew) {
             return (
                 <div>
-                    <button onClick = { () => this.setState({showCreateNewAppt: false}) } className="button level-right">
+                    <button onClick = { () => this.setState({showAppointmentNew: false}) } className="button level-right">
                         <span className="icon">
                             <FontAwesomeIcon icon={faArrowCircleLeft} />
                         </span>
@@ -23,7 +23,7 @@ class Appointments extends Component {
         }
         return (
             <div>
-                <button onClick = { () => this.setState({showCreateNewAppt: true}) } className="button level-right">
+                <button onClick = { () => this.setState({showAppointmentNew: true}) } className="button level-right">
                     <span className="icon">
                         <FontAwesomeIcon icon={faCalendarPlus} />
                     </span>
