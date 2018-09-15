@@ -4,8 +4,13 @@ import AppointmentField from './AppointmentField';
 import SlotField from './SlotField';
 import Calendar from '../Calendar';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import * as actions from '../../actions';
 
-class AppointmentNew extends Component {
+class AppointmentForm extends Component {
+    constructor(props) {
+        super(props);
+    }
     renderFields() {
         return (
             <div>
@@ -22,7 +27,7 @@ class AppointmentNew extends Component {
             <div>
                 <form onSubmit={this.props.handleSubmit(values => {
                     values.date = this.props.date;
-                    console.log(values);
+                    this.props.submitAppointment(values);
                 })}>
                     {this.renderFields()}
                     <button type="submit">Submit</button>
@@ -46,9 +51,9 @@ function mapStateToProps({date}) {
     return {date};
 }
 
-AppointmentNew = connect(mapStateToProps)(AppointmentNew);
+AppointmentForm = connect(mapStateToProps, actions)(withRouter(AppointmentForm));
 
 export default reduxForm({
     validate: validate,
     form: 'appointmentForm'
-})(AppointmentNew); 
+})(AppointmentForm); 

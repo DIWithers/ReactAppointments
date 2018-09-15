@@ -9,3 +9,9 @@ export const fetchUser = () => async dispatch => {
 export const updateDate = (date) => async dispatch => {
     dispatch({ type: SELECT_DATE, payload: date});
 };
+
+export const submitAppointment = (values) => async dispatch => {
+    const res = await axios.post('/api/appointments', values);
+    // Create FETCH_APPT instead to update user's appointments
+    // dispatch({ type: FETCH_USER, payload: res.data});
+};
