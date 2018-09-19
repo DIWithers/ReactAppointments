@@ -5,12 +5,10 @@ const SlotSchema = require('./Slot');
 const appointmentSchema = new Schema({
     name: String,
     email: String,
-    phone: Number,
+    phone: String,
     slots: [SlotSchema],
     createdAt: Date,
-    _user: {
-        type: Schema.Types.ObjectId, ref: 'User'
-    },
+    _user: { type: Schema.Types.ObjectId, ref: 'User'},
     confirmationSent: { type: Boolean, default: false }
 });
  mongoose.model('appointments', appointmentSchema); 

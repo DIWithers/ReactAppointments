@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const slotSchema = new Schema({
-    month: Number,
-    day: Number,
-    year: Number,
-    hour: Number,
-    minute: Number,
+    month: String,
+    day: String,
+    year: String,
+    hour: String,
+    minute: String,
     createdAt: Date
 });
 module.exports = slotSchema; 
