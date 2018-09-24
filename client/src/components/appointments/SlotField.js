@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
+import timeConversions from '../../TimeConversions';
 
 class SlotField extends Component {
     render() {
-        const slots = [
-                { military: "0000", standard: "12:00 AM" },
-                { military: "0030", standard: "12:30 AM" },
-                { military: "0100", standard: "01:00 AM" },
-                { military: "0130", standard: "01:30 AM" },
-                { military: "0200", standard: "02:00 AM" },
-                { military: "0230", standard: "02:30 AM" },
-                { military: "0300", standard: "03:00 AM" }
-            ]
+        const slots = [];
+        for (let time in timeConversions) {
+            slots.push(time);
+        }
         let slotOptions =  slots.map((slot) =>
-            <option key={slot.military} value={slot.military}>{slot.standard}</option>
+            <option key={slot} value={slot}>{timeConversions[slot].display}</option>
         );
         return(
             <div>
