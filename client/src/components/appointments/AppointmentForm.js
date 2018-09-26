@@ -1,8 +1,8 @@
 import React, { Component }from 'react';
 import { reduxForm, Field } from 'redux-form';
+import MeridianField from './MeridianField';
 import AppointmentField from './AppointmentField';
 import SlotField from './SlotField';
-import Calendar from '../Calendar';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
@@ -10,10 +10,19 @@ import * as actions from '../../actions';
 class AppointmentForm extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props.meridian);
     }
     renderFields() {
         return (
-            <div>
+            <div className="box" style={{width: '50%'}}>
+                <Field 
+                    name="meridian" 
+                    component={MeridianField}
+                    options={{
+                        am: 'AM',
+                        pm: 'PM'
+                    }}
+                />
                 <Field label="Available Times" name="slot" date={this.props.date} component={SlotField}/>
                 <Field label="Name" type="text" name="name" component={AppointmentField}/>
                 <Field label="Email" type="email" name="email" component={AppointmentField}/>
@@ -23,6 +32,7 @@ class AppointmentForm extends Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div>
                 <form onSubmit={this.props.handleSubmit(values => {
