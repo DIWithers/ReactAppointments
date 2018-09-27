@@ -1,16 +1,12 @@
 import React from 'react';
-import Calendar from './Calendar';
 import Appointments from './appointments/Appointments';
-
+//switch Appointments and AppointmentsNew based on state, also header title?
+// Make appointments it's own route?
 const Dashboard = () => {
     return (
         <div>
-            <Calendar />
             <Appointments />
         </div>
     );
 };
 export default Dashboard;
-
-//show calendar
-//show appointments

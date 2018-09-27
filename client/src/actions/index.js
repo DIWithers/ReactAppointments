@@ -7,13 +7,7 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const updateDate = (date) => async dispatch => {
-    console.log(date);
     dispatch({ type: SELECT_DATE, payload: date});
-};
-
-export const updateMeridian = (meridian) => async dispatch => {
-    console.log(meridian);
-    dispatch({ type: UPDATE_MERIDIAN, payload: meridian});
 };
 
 export const submitAppointment = (values) => async dispatch => {

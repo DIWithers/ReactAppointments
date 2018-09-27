@@ -119,5 +119,4 @@ function mapStateToProps({ selectedDate }) {
     return { selectedDate };
 }
 
-
 export default connect(mapStateToProps, actions)(Calendar);
