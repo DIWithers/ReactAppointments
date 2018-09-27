@@ -1,6 +1,5 @@
 import React, { Component }from 'react';
 import { reduxForm, Field } from 'redux-form';
-import MeridianField from './MeridianField';
 import AppointmentField from './AppointmentField';
 import SlotField from './SlotField';
 import { connect } from 'react-redux';

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
-const MilitaryToStandard = require('../client/src/TimeConversions');
+const MilitaryToStandard = require('../client/src/militaryTimeConversions');
 
 const Appointment = mongoose.model('appointments');
 
