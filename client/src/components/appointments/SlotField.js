@@ -22,7 +22,6 @@ class SlotField extends Component {
                 <input 
                     {...this.props.input}
                     type="radio"
-                    value={meridian}
                     style={{margin: '10px 10px', textAlign: 'center'}}
                     onChange={() => this.onMeridianChange({meridian})}
                     checked={meridian === this.state.meridian || false }
