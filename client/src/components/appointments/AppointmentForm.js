@@ -10,35 +10,37 @@ import * as actions from '../../actions';
 class AppointmentForm extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.meridian);
     }
+
     renderFields() {
         return (
             <div className="box" style={{width: '50%'}}>
                 <Field 
-                    name="meridian" 
-                    component={MeridianField}
+                    label="Available Times" 
+                    name="slot" 
+                    date={this.props.date} 
                     options={{
                         am: 'AM',
                         pm: 'PM'
-                    }}
-                />
-                <Field label="Available Times" name="slot" date={this.props.date} component={SlotField}/>
+                    }} 
+                    component={SlotField}/>
                 <Field label="Name" type="text" name="name" component={AppointmentField}/>
                 <Field label="Email" type="email" name="email" component={AppointmentField}/>
                 <Field label="Phone" type="phone" name="phone" component={AppointmentField}/>
             </div>
         );
     }
-
     render() {
         console.log(this.props);
         return (
             <div>
                 <form onSubmit={this.props.handleSubmit(values => {
                     values.date = this.props.date;
+                    console.log("!!!! : ", this.props);
                     this.props.submitAppointment(values);
-                })}>
+                }
+                // onChange={this.props.handle}
+                )}>
                     {this.renderFields()}
                     <button type="submit">Submit</button>
                 </form>
