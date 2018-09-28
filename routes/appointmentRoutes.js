@@ -5,6 +5,10 @@ const MilitaryToStandard = require('../client/src/militaryTimeConversions');
 const Appointment = mongoose.model('appointments');
 
 module.exports = (app) => {
+    app.get('/api/appointments', requireLogin, async (req, res) => {
+        const appointments = await Appointment.find({ _user: req.user.id});
+        res.send(appointments);
+    });
     app.post('/api/appointments', requireLogin, async (req, res) => {
         const { name, email, phone, date, slot } = req.body;
         const appointment = new Appointment({
