@@ -6,6 +6,7 @@ const slotSchema = new Schema({
     year: String,
     hour: String,
     minute: String,
+    military: Number,
     createdAt: Date
 });
 module.exports = slotSchema; 

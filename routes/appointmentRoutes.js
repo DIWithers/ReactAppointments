@@ -7,7 +7,10 @@ const Appointment = mongoose.model('appointments');
 module.exports = (app) => {
     app.get('/api/appointments', requireLogin, async (req, res) => {
         const appointments = await Appointment.find({ _user: req.user.id});
-        res.send(appointments);
+        const orderedAppointments = appointments.sort((a, b) => {
+            return a.slots[0].military - b.slots[0].military;
+        });
+        res.send(orderedAppointments);
     });
     app.post('/api/appointments', requireLogin, async (req, res) => {
         const { name, email, phone, date, slot } = req.body;
@@ -20,13 +23,17 @@ module.exports = (app) => {
                 day: date.date,
                 year: date.years,
                 hour: MilitaryToStandard[slot].hour,
-                minute: MilitaryToStandard[slot].min
+                minute: MilitaryToStandard[slot].min,
+                military: MilitaryToStandard[slot].military
             },
             createdAt: Date.now(),
             _user: req.user.id
         });
         appointment.save();
-        //start time TO end time
-        // Still need to send text, consult Mailer example
+        res.redirect('/appointments');
     });
 };
+
+        //temporary green confirmation modal
+        //start time TO end time?
+        // Still need to send text, consult Mailer example

@@ -19,20 +19,28 @@ class Appointments extends Component {
     }
 
     renderAppointments() {
-        return this.props.appointments.map(appointment => {
-            return (
-                <div className="card darken-1" key={appointment._id}>
-                    <div className="card-content">
-                        <p className="subtitle">
-                            {appointment.name}
-                        </p>
-                        <p className="subtitle">
-                            {this.renderTime(appointment.slots[0].hour, appointment.slots[0].minute)}
-                        </p>
-                    </div>
-                </div>
-            )
+        const appointments = this.props.appointments.filter(appointmentDate => {
+            const { years, months, date } = this.props.date;
+            return appointmentDate.slots[0].year == years && appointmentDate.slots[0].month == months && appointmentDate.slots[0].day == date;
         });
+        console.log(appointments);
+        if (appointments.length > 0) {
+            return appointments.map(appointment => {
+                return (
+                    <div className="card" key={appointment._id}>
+                        <div className="card-content">
+                            <p className="subtitle">
+                                {appointment.name}
+                            </p>
+                            <p className="subtitle">
+                                {this.renderTime(appointment.slots[0].hour, appointment.slots[0].minute)}
+                            </p>
+                        </div>
+                    </div>
+                )
+            });
+        }
+        return <p className="subtitle">No Appointments.</p>
     }
 
     render() {
@@ -53,7 +61,7 @@ class Appointments extends Component {
     }
 };
 
-function mapStateToProps( { appointments}) {
-    return { appointments };
+function mapStateToProps( { appointments, date }) {
+    return { appointments, date };
 }
 export default connect(mapStateToProps, { fetchAppointments })(Appointments);
