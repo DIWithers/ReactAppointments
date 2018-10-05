@@ -14,7 +14,6 @@ class Calendar extends Component {
             endOfWeek: moment().endOf('week'),
             monthStart: moment().startOf('month'),
             monthEnd: moment().endOf('month'),
-            shouldShowFullMonth: this.props.showMonth
         }
     }
 
@@ -25,20 +24,37 @@ class Calendar extends Component {
     renderHeader() {
         const dateFormat = "MMMM YYYY";
         let currentMonth = this.state.monthStart.clone();
-        console.log(currentMonth);
-        return (
-            <div className="header row flex-middle">
-                <div className="col col-end">
-                    <div className="icon" onClick={this.prevWeek}>chevron_left</div>
+
+        if (this.props.showMonth) {
+            return (
+                <div className="header row flex-middle">
+                    <div className="col col-end">
+                        <div className="icon" onClick={this.prevMonth}>chevron_left</div>
+                    </div>
+                    <div className="col col-center">
+                        <span>{currentMonth.format(dateFormat)}</span>
+                    </div>
+                    <div className="col col-start" onClick={this.nextMonth}>
+                        <div className="icon">chevron_right</div>
+                    </div>
                 </div>
-                <div className="col col-center">
-                    <span>{currentMonth.format(dateFormat)}</span>
+            );
+        }
+        else {
+            return (
+                <div className="header row flex-middle">
+                    <div className="col col-end">
+                        <div className="icon" onClick={this.prevWeek}>chevron_left</div>
+                    </div>
+                    <div className="col col-center">
+                        <span>{currentMonth.format(dateFormat)}</span>
+                    </div>
+                    <div className="col col-start" onClick={this.nextWeek}>
+                        <div className="icon">chevron_right</div>
+                    </div>
                 </div>
-                <div className="col col-start" onClick={this.nextWeek}>
-                    <div className="icon">chevron_right</div>
-                </div>
-            </div>
-        );
+            );
+        }
     }
 
     renderDays() {
@@ -62,9 +78,9 @@ class Calendar extends Component {
         let days = [];
         let day = startOfWeek.clone();
         let endDate = endOfWeek.clone();
-
         if (this.props.showMonth) {
-            endDate = monthEnd;
+            day = monthStart.clone().startOf('week');
+            endDate = monthEnd.clone();
             while( day <= endDate) {
                 for (let i = 0; i < 7; i++) {
                     formattedDate = day.format(dateFormat);
@@ -72,7 +88,7 @@ class Calendar extends Component {
                     days.push(
                         <div 
                             className={ `col cell ${
-                                !selectedDate.clone().isSame(day, 'month') ? 
+                                !monthStart.clone().isSame(day, 'month') ? 
                                 "disabled" : day.isSame(selectedDate, 'day') ?
                                     "selected" : ""
                             }` }
@@ -124,7 +140,6 @@ class Calendar extends Component {
     };
   
     nextWeek = () => {
-        console.log(this.state.monthStart);
         this.setState({
             startOfWeek: this.state.startOfWeek.add(1, 'week'),
             endOfWeek: this.state.endOfWeek.add(1, 'week'),
@@ -137,6 +152,21 @@ class Calendar extends Component {
             startOfWeek: this.state.startOfWeek.subtract(1, 'week'),
             endOfWeek: this.state.endOfWeek.subtract(1, 'week'),
             monthStart: this.state.startOfWeek.clone().add(4, 'day')
+        })
+    }
+
+    nextMonth = () => {
+        const daysInNextMonth = this.state.monthEnd.clone().add(1, 'day').daysInMonth();
+        this.setState({
+            monthStart: this.state.monthEnd.clone().add(1, 'day'),
+            monthEnd: this.state.monthEnd.clone().add(daysInNextMonth, 'day')
+        })
+    }
+    prevMonth = () => {
+        const daysInPrevMonth = this.state.monthStart.clone().subtract(1, 'day').daysInMonth();
+        this.setState({
+            monthStart: this.state.monthStart.clone().subtract(daysInPrevMonth, 'day'),
+            monthEnd: this.state.monthStart.clone().subtract(1, 'day')
         })
     }
 
