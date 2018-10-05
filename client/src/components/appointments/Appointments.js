@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Calendar from '../Calendar';
 import { connect } from 'react-redux';
-import { fetchAppointments } from '../../actions';
+import { fetchAppointments, showFullMonth } from '../../actions';
 import timeConversions from '../../militaryTimeConversions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarPlus } from '@fortawesome/free-solid-svg-icons';
@@ -11,6 +11,13 @@ class Appointments extends Component {
 
     componentDidMount() {
         this.props.fetchAppointments();
+        this.props.showFullMonth(false);
+    }
+
+    renderDate(appointment) {
+        return (
+            'Date: Oct 2, 2018'
+        )
     }
 
     renderTime(hour, minute) {
@@ -30,7 +37,10 @@ class Appointments extends Component {
                     <div className="card" key={appointment._id}>
                         <div className="card-content">
                             <p className="subtitle">
-                                {appointment.name}
+                                {this.renderDate()}
+                            </p>
+                            <p className="subtitle">
+                                Name: {appointment.name}
                             </p>
                             <p className="subtitle">
                                 {this.renderTime(appointment.slots[0].hour, appointment.slots[0].minute)}
@@ -64,4 +74,4 @@ class Appointments extends Component {
 function mapStateToProps( { appointments, date }) {
     return { appointments, date };
 }
-export default connect(mapStateToProps, { fetchAppointments })(Appointments);
+export default connect(mapStateToProps, { fetchAppointments, showFullMonth })(Appointments);

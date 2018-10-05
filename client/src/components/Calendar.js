@@ -13,6 +13,7 @@ class Calendar extends Component {
             startOfWeek: moment().startOf('week'),
             endOfWeek: moment().endOf('week'),
             currentMonth: moment().format("MMMM YYYY"),
+            shouldShowFullMonth: this.props.showMonth
         }
     }
 
@@ -52,33 +53,65 @@ class Calendar extends Component {
     renderCells() {
         const { startOfWeek, endOfWeek, selectedDate, currentMonth } = this.state;
         const dateFormat = "D";
+        const rows = [];
         let formattedDate = "";
-        let row = null;
         let days = [];
         let day = startOfWeek.clone();
         let endDate = endOfWeek.clone();
         let monthStart = selectedDate.clone().startOf('month');
-        while( day <= endDate) {
-            formattedDate = day.format(dateFormat);
-            const cloneDay = day.clone();
-            days.push(
-                <div 
-                    className={ `col cell ${
-                        day.isSame(selectedDate, 'day') ?
-                            "selected" : ""
-                    }`}
-                    key={day.toString()}
-                    onClick={() => this.onDateClick(cloneDay)}
-                >
-                    <span>{formattedDate}</span>
-                    <span className="bg">{formattedDate}</span>
-                </div>
-            )
-            day = day.add(1, 'day');
+        let monthEnd = selectedDate.clone().endOf('month');
+
+        if (this.props.showMonth) {
+            endDate = monthEnd;
+            while( day <= endDate) {
+                for (let i = 0; i < 7; i++) {
+                    formattedDate = day.format(dateFormat);
+                    const cloneDay = day.clone();
+                    days.push(
+                        <div 
+                            className={ `col cell ${
+                                !selectedDate.clone().isSame(day, 'month') ? 
+                                "disabled" : day.isSame(selectedDate, 'day') ?
+                                    "selected" : ""
+                            }` }
+                            key={day.toString()}
+                            onClick={() => this.onDateClick(cloneDay)}
+                        >
+                            <span>{formattedDate}</span>
+                            <span className="bg">{formattedDate}</span>
+                        </div>
+                    )
+                    day = day.add(1, 'day');
+                }
+            }
         }
-        row = <div className="row" key={day}>{days}</div>
+        else {
+            while( day <= endDate) {
+                formattedDate = day.format(dateFormat);
+                const cloneDay = day.clone();
+                days.push(
+                    <div 
+                        className={ `col cell ${
+                            day.isSame(selectedDate, 'day') ?
+                                "selected" : ""
+                        }` }
+                        key={day.toString()}
+                        onClick={() => this.onDateClick(cloneDay)}
+                    >
+                        <span>{formattedDate}</span>
+                        <span className="bg">{formattedDate}</span>
+                    </div>
+                )
+                day = day.add(1, 'day');
+            }
+        }
+        rows.push(
+            <div className="row" key={day}>
+                {days}
+            </div>
+        );
         days = [];
-        return <div className="body">{row}</div>;
+        return <div className="body">{rows}</div>;
     }
 
     onDateClick = day => {
@@ -115,8 +148,8 @@ class Calendar extends Component {
     }
 }
 
-function mapStateToProps({ selectedDate }) {
-    return { selectedDate };
+function mapStateToProps({ selectedDate, showMonth }) {
+    return { selectedDate, showMonth };
 }
 
 export default connect(mapStateToProps, actions)(Calendar);

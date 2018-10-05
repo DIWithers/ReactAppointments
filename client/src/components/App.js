@@ -7,6 +7,7 @@ import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
 import AppointmentNew from './appointments/AppointmentNew';
+import Availability from './Availability';
 const Clients = () => <h2>Clients</h2>
 const ClientNew = () => <h2>ClientNew</h2>
 
@@ -24,6 +25,7 @@ class App extends Component {
                         <Route exact path="/" component={Landing} />
                         <Route exact path="/appointments" component={Dashboard} />
                         <Route exact path="/appointments/new" component={AppointmentNew} />
+                        <Route exact path="/availability" component={Availability} />
                         <Route exact path="/clients" component={Clients} />
                         <Route exact path="/clients/new" component={ClientNew} />
                     </div>

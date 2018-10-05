@@ -169,6 +169,7 @@ main {
   cursor: pointer;
   background: var(--neutral-color);
   transition: 0.25s ease-out;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .calendar .body .cell:hover {

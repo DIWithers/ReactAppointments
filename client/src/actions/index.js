@@ -1,5 +1,5 @@
 import axios from 'axios';
-import  { FETCH_USER, SELECT_DATE, FETCH_APPOINTMENTS } from './types';
+import  { FETCH_USER, SELECT_DATE, FETCH_APPOINTMENTS, SHOW_FULL_MONTH } from './types';
 
 export const fetchUser = () => async dispatch => {
     const res = await axios.get('/api/current_user');
@@ -8,13 +8,16 @@ export const fetchUser = () => async dispatch => {
 
 export const fetchAppointments = () => async dispatch => {
     const res = await axios.get('/api/appointments');
-    console.log(res);
     dispatch({ type: FETCH_APPOINTMENTS, payload: res.data });
 }
 
 export const updateDate = (date) => async dispatch => {
     dispatch({ type: SELECT_DATE, payload: date});
 };
+
+export const showFullMonth = (shouldShow) =>  async dispatch => {
+    dispatch({ type: SHOW_FULL_MONTH, payload: shouldShow});
+}
 
 export const submitAppointment = (values) => async dispatch => {
     const res = await axios.post('/api/appointments', values);
