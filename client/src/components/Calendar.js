@@ -12,7 +12,8 @@ class Calendar extends Component {
             selectedDate: moment(),
             startOfWeek: moment().startOf('week'),
             endOfWeek: moment().endOf('week'),
-            currentMonth: moment().startOf('month'),
+            monthStart: moment().startOf('month'),
+            monthEnd: moment().endOf('month'),
             shouldShowFullMonth: this.props.showMonth
         }
     }
@@ -23,7 +24,8 @@ class Calendar extends Component {
 
     renderHeader() {
         const dateFormat = "MMMM YYYY";
-        let currentMonth = this.state.currentMonth;
+        let currentMonth = this.state.monthStart.clone();
+        console.log(currentMonth);
         return (
             <div className="header row flex-middle">
                 <div className="col col-end">
@@ -53,15 +55,13 @@ class Calendar extends Component {
     }
 
     renderCells() {
-        const { startOfWeek, endOfWeek, selectedDate, currentMonth } = this.state;
+        const { startOfWeek, endOfWeek, selectedDate, monthStart, monthEnd } = this.state;
         const dateFormat = "D";
         const rows = [];
         let formattedDate = "";
         let days = [];
         let day = startOfWeek.clone();
         let endDate = endOfWeek.clone();
-        let monthStart = selectedDate.clone().startOf('month');
-        let monthEnd = selectedDate.clone().endOf('month');
 
         if (this.props.showMonth) {
             endDate = monthEnd;
@@ -124,10 +124,11 @@ class Calendar extends Component {
     };
   
     nextWeek = () => {
+        console.log(this.state.monthStart);
         this.setState({
             startOfWeek: this.state.startOfWeek.add(1, 'week'),
             endOfWeek: this.state.endOfWeek.add(1, 'week'),
-            currentMonth: this.state.startOfWeek.clone().add(4, 'day')
+            monthStart: this.state.startOfWeek.clone().add(4, 'day')
         })
     }
     
@@ -135,7 +136,7 @@ class Calendar extends Component {
         this.setState({
             startOfWeek: this.state.startOfWeek.subtract(1, 'week'),
             endOfWeek: this.state.endOfWeek.subtract(1, 'week'),
-            currentMonth: this.state.startOfWeek.clone().add(4, 'day')
+            monthStart: this.state.startOfWeek.clone().add(4, 'day')
         })
     }
 
