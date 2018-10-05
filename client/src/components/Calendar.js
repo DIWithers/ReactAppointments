@@ -12,7 +12,7 @@ class Calendar extends Component {
             selectedDate: moment(),
             startOfWeek: moment().startOf('week'),
             endOfWeek: moment().endOf('week'),
-            currentMonth: moment().format("MMMM YYYY"),
+            currentMonth: moment().startOf('month'),
             shouldShowFullMonth: this.props.showMonth
         }
     }
@@ -22,13 +22,15 @@ class Calendar extends Component {
     }
 
     renderHeader() {
+        const dateFormat = "MMMM YYYY";
+        let currentMonth = this.state.currentMonth;
         return (
             <div className="header row flex-middle">
                 <div className="col col-end">
                     <div className="icon" onClick={this.prevWeek}>chevron_left</div>
                 </div>
                 <div className="col col-center">
-                    <span>{this.state.currentMonth}</span>
+                    <span>{currentMonth.format(dateFormat)}</span>
                 </div>
                 <div className="col col-start" onClick={this.nextWeek}>
                     <div className="icon">chevron_right</div>
@@ -125,7 +127,7 @@ class Calendar extends Component {
         this.setState({
             startOfWeek: this.state.startOfWeek.add(1, 'week'),
             endOfWeek: this.state.endOfWeek.add(1, 'week'),
-            currentMonth: this.state.startOfWeek.clone().add(4, 'day').format("MMMM YYYY")
+            currentMonth: this.state.startOfWeek.clone().add(4, 'day')
         })
     }
     
@@ -133,7 +135,7 @@ class Calendar extends Component {
         this.setState({
             startOfWeek: this.state.startOfWeek.subtract(1, 'week'),
             endOfWeek: this.state.endOfWeek.subtract(1, 'week'),
-            currentMonth: this.state.startOfWeek.clone().add(4, 'day').format("MMMM YYYY")
+            currentMonth: this.state.startOfWeek.clone().add(4, 'day')
         })
     }
 
